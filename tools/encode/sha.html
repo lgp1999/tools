@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA加密 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="sha.html" class="active"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>SHA加密</h1>
+                    <p class="subtitle">计算字符串的SHA1/SHA256哈希值</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="options-group">
+                            <div class="option-item">
+                                <input type="radio" name="shaType" id="sha1" value="sha1">
+                                <label for="sha1">SHA1</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="shaType" id="sha256" value="sha256" checked>
+                                <label for="sha256">SHA256</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section">
+                            <label class="tool-label">输入文本</label>
+                            <textarea class="tool-textarea" id="inputText" placeholder="在此输入要加密的文本..."></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="calculateSHA()">
+                                <i class="fas fa-lock"></i> 计算哈希
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyResult()">
+                                <i class="fas fa-copy"></i> 复制结果
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-result" style="margin-top: 20px;">
+                            <div class="tool-result-label">哈希结果</div>
+                            <div class="tool-result-content" id="result" style="font-family: monospace; font-size: 14px; word-break: break-all;">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            关于 SHA
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li><strong>SHA1：</strong>产生160位哈希值，已不再安全</li>
+                            <li><strong>SHA256：</strong>产生256位哈希值，目前广泛使用</li>
+                            <li>SHA算法比MD5更安全，推荐使用SHA256</li>
+                            <li>常用于数字签名、证书、区块链等安全场景</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const resultEl = document.getElementById('result');
+        const shaType = document.getElementsByName('shaType');
+        
+        inputText.addEventListener('input', debounce(calculateSHA, 300));
+        shaType.forEach(radio => radio.addEventListener('change', calculateSHA));
+        
+        function calculateSHA() {
+            const text = inputText.value;
+            if (!text) {
+                resultEl.textContent = '-';
+                return;
+            }
+            
+            const type = document.querySelector('input[name="shaType"]:checked').value;
+            
+            if (type === 'sha1') {
+                resultEl.textContent = SHA.sha1(text);
+            } else {
+                resultEl.textContent = SHA.sha256(text);
+            }
+        }
+        
+        function copyResult() {
+            copyToClipboard(resultEl.textContent);
+        }
+        
+        function clearAll() {
+            inputText.value = '';
+            resultEl.textContent = '-';
+        }
+    </script>
+</body>
+</html>

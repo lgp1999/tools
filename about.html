@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - ToolBox Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">导航</div>
+                    <ul class="nav-list">
+                        <li><a href="index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i><span>关于我们</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <div class="nav-title">友情链接</div>
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>关于 ToolBox Pro</h1>
+                    <p class="subtitle">安全、快捷、好用的在线工具箱</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-bullseye"></i>
+                            我们的使命
+                        </h3>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px;">
+                            ToolBox Pro 致力于打造最实用的在线工具集合平台。我们相信，通过提供简洁、高效的工具，
+                            可以帮助用户提升工作效率，简化日常任务。所有工具均采用纯前端技术实现，
+                            无需安装任何软件，打开即用，用完即走。
+                        </p>
+                        
+                        <h3 class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            隐私与安全
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2; margin-bottom: 24px;">
+                            <li>所有数据处理均在浏览器本地完成，不会上传到服务器</li>
+                            <li>不收集任何用户个人信息</li>
+                            <li>无需注册登录即可使用全部功能</li>
+                            <li>开源透明，代码可供审查</li>
+                        </ul>
+                        
+                        <h3 class="section-title">
+                            <i class="fas fa-tools"></i>
+                            现有工具
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; color: var(--text-secondary);">
+                            <div>
+                                <strong style="color: var(--primary);">文本工具</strong>
+                                <ul style="font-size: 14px; line-height: 2; margin-top: 8px;">
+                                    <li>JSON格式化</li>
+                                    <li>字数统计</li>
+                                    <li>文本对比</li>
+                                    <li>Markdown预览</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary);">编码加密</strong>
+                                <ul style="font-size: 14px; line-height: 2; margin-top: 8px;">
+                                    <li>Base64编解码</li>
+                                    <li>URL编解码</li>
+                                    <li>MD5/SHA加密</li>
+                                    <li>AES加密</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary);">办公辅助</strong>
+                                <ul style="font-size: 14px; line-height: 2; margin-top: 8px;">
+                                    <li>二维码生成</li>
+                                    <li>条形码生成</li>
+                                    <li>密码生成器</li>
+                                    <li>颜色转换</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary);">开发工具</strong>
+                                <ul style="font-size: 14px; line-height: 2; margin-top: 8px;">
+                                    <li>UUID生成</li>
+                                    <li>正则表达式测试</li>
+                                    <li>代码格式化</li>
+                                    <li>时间戳转换</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-handshake"></i>
+                            合作伙伴
+                        </h3>
+                        <div class="friend-card" style="display: flex; gap: 20px; align-items: center;">
+                            <div style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 28px;">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin-bottom: 8px;">TapSave</h4>
+                                <p style="font-size: 14px; color: var(--text-secondary);">
+                                    多平台支持的内容浏览工具，无需登录即可快速浏览公共内容，
+                                    保持原始画质，支持高清视频和图片。
+                                </p>
+                            </div>
+                            <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                访问 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

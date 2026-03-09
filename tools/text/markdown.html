@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown预览 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="json.html"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                        <li><a href="markdown.html" class="active"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Markdown预览</h1>
+                    <p class="subtitle">实时预览 Markdown 渲染效果</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div>
+                                <label class="tool-label">Markdown 输入</label>
+                                <textarea class="tool-textarea" id="markdownInput" placeholder="在此输入 Markdown 文本...
+
+# 标题
+## 二级标题
+
+**粗体文本** 和 *斜体文本*
+
+- 列表项 1
+- 列表项 2
+- 列表项 3
+
+[链接文本](https://www.tapsave.net/)
+
+```javascript
+console.log('Hello World');
+```
+
+> 引用文本"></textarea>
+                            </div>
+                            <div>
+                                <label class="tool-label">预览</label>
+                                <div id="preview" style="padding: 16px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius); min-height: 300px; max-height: 400px; overflow-y: auto;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-secondary" onclick="copyHtml()">
+                                <i class="fas fa-copy"></i> 复制 HTML
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const markdownInput = document.getElementById('markdownInput');
+        const preview = document.getElementById('preview');
+        
+        markdownInput.addEventListener('input', updatePreview);
+        
+        function updatePreview() {
+            const markdown = markdownInput.value;
+            preview.innerHTML = marked.parse(markdown);
+        }
+        
+        function copyHtml() {
+            copyToClipboard(preview.innerHTML);
+        }
+        
+        function clearAll() {
+            markdownInput.value = '';
+            preview.innerHTML = '';
+        }
+        
+        // 初始预览
+        updatePreview();
+    </script>
+</body>
+</html>

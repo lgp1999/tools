@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式测试 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">开发工具</div>
+                    <ul class="nav-list">
+                        <li><a href="uuid.html"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
+                        <li><a href="regex.html" class="active"><i class="fas fa-spell-check"></i><span>正则测试</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>正则表达式测试</h1>
+                    <p class="subtitle">在线测试和调试正则表达式</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="tool-section">
+                            <label class="tool-label">正则表达式</label>
+                            <div style="display: flex; gap: 8px;">
+                                <span style="padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius) 0 0 var(--radius); font-family: monospace;">/</span>
+                                <input type="text" class="tool-input" id="regexPattern" placeholder="输入正则表达式，如: \d+" style="border-radius: 0; font-family: monospace;">
+                                <span style="padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-left: none; border-right: none; font-family: monospace;">/</span>
+                                <input type="text" class="tool-input" id="regexFlags" placeholder="flags" value="g" style="width: 80px; border-radius: 0 var(--radius) var(--radius) 0; font-family: monospace;">
+                            </div>
+                        </div>
+                        
+                        <div class="options-group">
+                            <div class="option-item">
+                                <input type="checkbox" id="flagGlobal" checked>
+                                <label for="flagGlobal">g (全局)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="flagIgnore">
+                                <label for="flagIgnore">i (忽略大小写)</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="flagMultiline">
+                                <label for="flagMultiline">m (多行)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section">
+                            <label class="tool-label">测试文本</label>
+                            <textarea class="tool-textarea" id="testText" placeholder="在此输入要测试的文本..."></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="testRegex()">
+                                <i class="fas fa-play"></i> 测试匹配
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-result" style="margin-top: 20px;">
+                            <div class="tool-result-label">匹配结果</div>
+                            <div class="tool-result-content" id="matchResult">-</div>
+                        </div>
+                        
+                        <div class="tool-result">
+                            <div class="tool-result-label">替换结果</div>
+                            <div class="tool-result-content" id="replaceResult">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-book"></i>
+                            常用正则表达式
+                        </h3>
+                        <table style="font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th>描述</th>
+                                    <th>正则表达式</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>邮箱</td>
+                                    <td><code>[\w.-]+@[\w.-]+\.\w+</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('[\\w.-]+@[\\w.-]+\\.\\w+')">使用</button></td>
+                                </tr>
+                                <tr>
+                                    <td>手机号</td>
+                                    <td><code>1[3-9]\d{9}</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('1[3-9]\\d{9}')">使用</button></td>
+                                </tr>
+                                <tr>
+                                    <td>URL</td>
+                                    <td><code>https?://[^\s]+</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('https?://[^\\s]+')">使用</button></td>
+                                </tr>
+                                <tr>
+                                    <td>IP地址</td>
+                                    <td><code>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}')">使用</button></td>
+                                </tr>
+                                <tr>
+                                    <td>中文字符</td>
+                                    <td><code>[\u4e00-\u9fa5]+</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('[\\u4e00-\\u9fa5]+')">使用</button></td>
+                                </tr>
+                                <tr>
+                                    <td>数字</td>
+                                    <td><code>\d+</code></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('\\d+')">使用</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const regexPattern = document.getElementById('regexPattern');
+        const regexFlags = document.getElementById('regexFlags');
+        const testText = document.getElementById('testText');
+        const matchResult = document.getElementById('matchResult');
+        const replaceResult = document.getElementById('replaceResult');
+        
+        // 标志位联动
+        document.getElementById('flagGlobal').addEventListener('change', updateFlags);
+        document.getElementById('flagIgnore').addEventListener('change', updateFlags);
+        document.getElementById('flagMultiline').addEventListener('change', updateFlags);
+        
+        function updateFlags() {
+            let flags = '';
+            if (document.getElementById('flagGlobal').checked) flags += 'g';
+            if (document.getElementById('flagIgnore').checked) flags += 'i';
+            if (document.getElementById('flagMultiline').checked) flags += 'm';
+            regexFlags.value = flags;
+        }
+        
+        function testRegex() {
+            const pattern = regexPattern.value;
+            const flags = regexFlags.value;
+            const text = testText.value;
+            
+            if (!pattern || !text) {
+                matchResult.textContent = '请输入正则表达式和测试文本';
+                return;
+            }
+            
+            try {
+                const regex = new RegExp(pattern, flags);
+                const matches = text.match(regex);
+                
+                if (matches) {
+                    matchResult.innerHTML = `<strong>找到 ${matches.length} 个匹配:</strong><br>` + 
+                        matches.map((m, i) => `[${i+1}] ${escapeHtml(m)}`).join('<br>');
+                    
+                    // 高亮显示
+                    const highlighted = text.replace(regex, match => `<mark>${escapeHtml(match)}</mark>`);
+                    replaceResult.innerHTML = highlighted;
+                } else {
+                    matchResult.textContent = '未找到匹配';
+                    replaceResult.textContent = text;
+                }
+            } catch (e) {
+                matchResult.textContent = '正则表达式错误: ' + e.message;
+            }
+        }
+        
+        function usePattern(pattern) {
+            regexPattern.value = pattern;
+            testRegex();
+        }
+        
+        function clearAll() {
+            regexPattern.value = '';
+            testText.value = '';
+            matchResult.textContent = '-';
+            replaceResult.textContent = '-';
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL编码 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="url.html" class="active"><i class="fas fa-link"></i><span>URL编码</span></a></li>
+                        <li><a href="md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>URL编码/解码</h1>
+                    <p class="subtitle">URL特殊字符编码与解码</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="options-group">
+                            <div class="option-item">
+                                <input type="checkbox" id="encodeAll" checked>
+                                <label for="encodeAll">编码所有字符（包括字母数字）</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section">
+                            <label class="tool-label">输入内容</label>
+                            <textarea class="tool-textarea" id="inputText" placeholder="在此输入要编码或解码的内容..."></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="encodeURL()">
+                                <i class="fas fa-arrow-down"></i> 编码 →
+                            </button>
+                            <button class="btn btn-primary" onclick="decodeURL()">
+                                <i class="fas fa-arrow-up"></i> ← 解码
+                            </button>
+                            <button class="btn btn-secondary" onclick="swapText()">
+                                <i class="fas fa-exchange-alt"></i> 交换
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyResult()">
+                                <i class="fas fa-copy"></i> 复制
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-section" style="margin-top: 20px;">
+                            <label class="tool-label">结果</label>
+                            <textarea class="tool-textarea" id="outputText" readonly placeholder="编码或解码结果将显示在这里..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            使用说明
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li><strong>URL编码：</strong>将特殊字符转换为%xx格式</li>
+                            <li><strong>URL解码：</strong>将%xx格式的编码还原为原字符</li>
+                            <li>常用于URL参数传递、处理中文链接</li>
+                            <li>encodeURIComponent 会编码更多字符，包括 / : 等</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const encodeAll = document.getElementById('encodeAll');
+        
+        function encodeURL() {
+            const text = inputText.value;
+            if (!text) return;
+            
+            if (encodeAll.checked) {
+                // 编码所有字符
+                outputText.value = encodeURIComponent(text);
+            } else {
+                // 只编码特殊字符
+                outputText.value = encodeURI(text);
+            }
+        }
+        
+        function decodeURL() {
+            const text = inputText.value;
+            if (!text) return;
+            
+            try {
+                outputText.value = decodeURIComponent(text);
+            } catch (e) {
+                showToast('解码失败: 无效的编码字符串');
+            }
+        }
+        
+        function swapText() {
+            const temp = inputText.value;
+            inputText.value = outputText.value;
+            outputText.value = temp;
+        }
+        
+        function copyResult() {
+            copyToClipboard(outputText.value);
+        }
+        
+        function clearAll() {
+            inputText.value = '';
+            outputText.value = '';
+        }
+    </script>
+</body>
+</html>

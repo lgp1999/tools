@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字数统计 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="json.html"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="word-count.html" class="active"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>字数统计</h1>
+                    <p class="subtitle">统计文本字数、字符数、行数</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                            <div style="text-align: center; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius);">
+                                <div style="font-size: 32px; font-weight: 700; color: var(--primary);" id="totalChars">0</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">总字符数</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius);">
+                                <div style="font-size: 32px; font-weight: 700; color: var(--success);" id="chineseChars">0</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">中文字符</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius);">
+                                <div style="font-size: 32px; font-weight: 700; color: var(--info);" id="wordCount">0</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">单词数</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius);">
+                                <div style="font-size: 32px; font-weight: 700; color: var(--warning);" id="lineCount">0</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">行数</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section">
+                            <label class="tool-label">输入文本</label>
+                            <textarea class="tool-textarea" id="textInput" placeholder="在此粘贴或输入文本..."></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-secondary" onclick="copyText()">
+                                <i class="fas fa-copy"></i> 复制文本
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearText()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const textInput = document.getElementById('textInput');
+        const totalChars = document.getElementById('totalChars');
+        const chineseChars = document.getElementById('chineseChars');
+        const wordCount = document.getElementById('wordCount');
+        const lineCount = document.getElementById('lineCount');
+        
+        textInput.addEventListener('input', updateCount);
+        
+        function updateCount() {
+            const text = textInput.value;
+            
+            // 总字符数
+            totalChars.textContent = text.length;
+            
+            // 中文字符
+            const chinese = text.match(/[\u4e00-\u9fa5]/g);
+            chineseChars.textContent = chinese ? chinese.length : 0;
+            
+            // 单词数（英文）
+            const words = text.match(/[a-zA-Z]+/g);
+            wordCount.textContent = words ? words.length : 0;
+            
+            // 行数
+            const lines = text.split('\n');
+            lineCount.textContent = lines.length;
+        }
+        
+        function copyText() {
+            copyToClipboard(textInput.value);
+        }
+        
+        function clearText() {
+            textInput.value = '';
+            updateCount();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox Pro - 专业在线工具箱</title>
+    <meta name="description" content="ToolBox Pro 是一个免费的在线工具箱，提供文本处理、编码加密、单位转换、二维码生成等多种实用工具，无需下载安装，即用即走。">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">热门工具</div>
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="tools/text/json.html"><i class="fas fa-code"></i><span>JSON格式化</span></a></li>
+                        <li><a href="tools/encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64转换</span></a></li>
+                        <li><a href="tools/office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/text/json.html"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="tools/text/text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="tools/text/word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                        <li><a href="tools/text/markdown.html"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="tools/encode/url.html"><i class="fas fa-link"></i><span>URL编码</span></a></li>
+                        <li><a href="tools/encode/md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="tools/encode/sha.html"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                        <li><a href="tools/encode/aes.html"><i class="fas fa-lock"></i><span>AES加密</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">单位转换</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/convert/length.html"><i class="fas fa-ruler"></i><span>长度转换</span></a></li>
+                        <li><a href="tools/convert/weight.html"><i class="fas fa-weight-hanging"></i><span>重量转换</span></a></li>
+                        <li><a href="tools/convert/temperature.html"><i class="fas fa-thermometer-half"></i><span>温度转换</span></a></li>
+                        <li><a href="tools/convert/data.html"><i class="fas fa-hdd"></i><span>数据存储</span></a></li>
+                        <li><a href="tools/convert/time.html"><i class="fas fa-clock"></i><span>时间换算</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">办公辅助</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                        <li><a href="tools/office/barcode.html"><i class="fas fa-barcode"></i><span>条形码生成</span></a></li>
+                        <li><a href="tools/office/password.html"><i class="fas fa-key"></i><span>密码生成</span></a></li>
+                        <li><a href="tools/office/color.html"><i class="fas fa-palette"></i><span>颜色转换</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">图片工具</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/image/base64.html"><i class="fas fa-image"></i><span>图片Base64</span></a></li>
+                        <li><a href="tools/image/compress.html"><i class="fas fa-compress"></i><span>图片压缩</span></a></li>
+                        <li><a href="tools/image/placeholder.html"><i class="fas fa-square"></i><span>占位图生成</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">时间日期</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/time/timestamp.html"><i class="fas fa-history"></i><span>时间戳转换</span></a></li>
+                        <li><a href="tools/time/countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                        <li><a href="tools/time/world-clock.html"><i class="fas fa-globe"></i><span>世界时钟</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">开发工具</div>
+                    <ul class="nav-list">
+                        <li><a href="tools/dev/code-format.html"><i class="fas fa-code"></i><span>代码格式化</span></a></li>
+                        <li><a href="tools/dev/regex.html"><i class="fas fa-spell-check"></i><span>正则测试</span></a></li>
+                        <li><a href="tools/dev/uuid.html"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <!-- 友情链接区域 -->
+            <div class="friend-links">
+                <div class="nav-title">友情链接</div>
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave - 跨平台内容浏览工具</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部栏 -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>在线工具箱</h1>
+                    <p class="subtitle">安全、快捷、好用的在线工具集合</p>
+                </div>
+                <div class="header-right">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-icon">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </header>
+            
+            <!-- 首页内容 -->
+            <div class="page-content">
+                <!-- 横幅区域 -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <h2>致力打造安全、快捷、好用的在线工具箱</h2>
+                        <p>所有工具均在浏览器本地运行，无需上传文件到服务器，保护您的数据隐私</p>
+                    </div>
+                </section>
+                
+                <!-- 精选工具 -->
+                <section class="tools-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-star"></i>
+                        精选工具
+                    </h3>
+                    <div class="tools-grid">
+                        <a href="tools/text/json.html" class="tool-card">
+                            <div class="tool-icon bg-blue">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>JSON格式化</h4>
+                                <p>JSON美化、压缩、校验和转换</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/encode/base64.html" class="tool-card">
+                            <div class="tool-icon bg-green">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>Base64转换</h4>
+                                <p>文本和文件的Base64编码解码</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/office/qrcode.html" class="tool-card">
+                            <div class="tool-icon bg-purple">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>二维码生成</h4>
+                                <p>快速生成二维码，支持自定义样式</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/encode/md5.html" class="tool-card">
+                            <div class="tool-icon bg-orange">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>MD5加密</h4>
+                                <p>字符串MD5哈希计算</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/time/timestamp.html" class="tool-card">
+                            <div class="tool-icon bg-cyan">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>时间戳转换</h4>
+                                <p>Unix时间戳与日期互转</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/convert/color.html" class="tool-card">
+                            <div class="tool-icon bg-pink">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>颜色转换</h4>
+                                <p>HEX、RGB、HSL颜色互转</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/office/password.html" class="tool-card">
+                            <div class="tool-icon bg-red">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>密码生成器</h4>
+                                <p>生成安全随机密码</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tools/dev/uuid.html" class="tool-card">
+                            <div class="tool-icon bg-indigo">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div class="tool-info">
+                                <h4>UUID生成</h4>
+                                <p>生成唯一标识符UUID</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                
+                <!-- 推荐友链卡片 -->
+                <section class="friend-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-thumbs-up"></i>
+                        推荐工具
+                    </h3>
+                    <div class="friend-card">
+                        <div class="friend-logo">
+                            <i class="fas fa-save"></i>
+                        </div>
+                        <div class="friend-content">
+                            <h4>TapSave</h4>
+                            <p>多平台支持的内容浏览工具，无需登录即可快速浏览公共内容，保持原始画质，支持高清视频和图片。</p>
+                            <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                访问网站 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 分类工具 -->
+                <section class="category-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-th-large"></i>
+                        全部分类
+                    </h3>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-file-alt text-blue"></i>
+                                <h4>文本工具</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/text/json.html">JSON格式化</a></li>
+                                <li><a href="tools/text/text-diff.html">文本对比</a></li>
+                                <li><a href="tools/text/word-count.html">字数统计</a></li>
+                                <li><a href="tools/text/markdown.html">Markdown预览</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-lock text-green"></i>
+                                <h4>编码加密</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/encode/base64.html">Base64编解码</a></li>
+                                <li><a href="tools/encode/url.html">URL编解码</a></li>
+                                <li><a href="tools/encode/md5.html">MD5加密</a></li>
+                                <li><a href="tools/encode/sha.html">SHA加密</a></li>
+                                <li><a href="tools/encode/aes.html">AES加密</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-exchange-alt text-purple"></i>
+                                <h4>单位转换</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/convert/length.html">长度转换</a></li>
+                                <li><a href="tools/convert/weight.html">重量转换</a></li>
+                                <li><a href="tools/convert/temperature.html">温度转换</a></li>
+                                <li><a href="tools/convert/data.html">数据存储</a></li>
+                                <li><a href="tools/convert/time.html">时间换算</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-briefcase text-orange"></i>
+                                <h4>办公辅助</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/office/qrcode.html">二维码生成</a></li>
+                                <li><a href="tools/office/barcode.html">条形码生成</a></li>
+                                <li><a href="tools/office/password.html">密码生成</a></li>
+                                <li><a href="tools/office/color.html">颜色转换</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-image text-pink"></i>
+                                <h4>图片工具</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/image/base64.html">图片Base64</a></li>
+                                <li><a href="tools/image/compress.html">图片压缩</a></li>
+                                <li><a href="tools/image/placeholder.html">占位图生成</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-clock text-cyan"></i>
+                                <h4>时间日期</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/time/timestamp.html">时间戳转换</a></li>
+                                <li><a href="tools/time/countdown.html">倒计时</a></li>
+                                <li><a href="tools/time/world-clock.html">世界时钟</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-header">
+                                <i class="fas fa-code text-indigo"></i>
+                                <h4>开发工具</h4>
+                            </div>
+                            <ul class="category-list">
+                                <li><a href="tools/dev/code-format.html">代码格式化</a></li>
+                                <li><a href="tools/dev/regex.html">正则测试</a></li>
+                                <li><a href="tools/dev/uuid.html">UUID生成</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- 页脚 -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-links">
+                        <a href="index.html">首页</a>
+                        <a href="about.html">关于我们</a>
+                        <a href="https://www.tapsave.net/" target="_blank">TapSave</a>
+                    </div>
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. All rights reserved. 
+                        <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

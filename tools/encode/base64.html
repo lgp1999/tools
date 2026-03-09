@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64转换 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">热门工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../../index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="base64.html" class="active"><i class="fas fa-exchange-alt"></i><span>Base64转换</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="base64.html" class="active"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="url.html"><i class="fas fa-link"></i><span>URL编码</span></a></li>
+                        <li><a href="md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="sha.html"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <div class="nav-title">友情链接</div>
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Base64转换</h1>
+                    <p class="subtitle">文本和文件的Base64编码解码</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="options-group">
+                            <div class="option-item">
+                                <input type="radio" name="mode" id="modeText" value="text" checked>
+                                <label for="modeText">文本模式</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="mode" id="modeFile" value="file">
+                                <label for="modeFile">文件模式</label>
+                            </div>
+                        </div>
+                        
+                        <!-- 文本模式 -->
+                        <div id="textMode">
+                            <div class="tool-section">
+                                <label class="tool-label">输入文本</label>
+                                <textarea class="tool-textarea" id="textInput" placeholder="在此输入要编码或解码的文本..."></textarea>
+                            </div>
+                            
+                            <div class="tool-actions">
+                                <button class="btn btn-primary" onclick="encodeBase64()">
+                                    <i class="fas fa-arrow-down"></i> 编码 →
+                                </button>
+                                <button class="btn btn-primary" onclick="decodeBase64()">
+                                    <i class="fas fa-arrow-up"></i> ← 解码
+                                </button>
+                                <button class="btn btn-secondary" onclick="swapText()">
+                                    <i class="fas fa-exchange-alt"></i> 交换
+                                </button>
+                                <button class="btn btn-secondary" onclick="copyTextResult()">
+                                    <i class="fas fa-copy"></i> 复制结果
+                                </button>
+                                <button class="btn btn-secondary" onclick="clearText()">
+                                    <i class="fas fa-trash"></i> 清空
+                                </button>
+                            </div>
+                            
+                            <div class="tool-section" style="margin-top: 20px;">
+                                <label class="tool-label">结果</label>
+                                <textarea class="tool-textarea" id="textOutput" readonly placeholder="编码或解码结果将显示在这里..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- 文件模式 -->
+                        <div id="fileMode" class="hidden">
+                            <div class="file-upload" id="fileUpload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>拖拽文件到此处，或点击上传</p>
+                                <p class="file-hint">支持任意文件类型</p>
+                                <input type="file" id="fileInput" style="display: none;">
+                            </div>
+                            
+                            <div id="fileInfo" class="tool-result hidden">
+                                <div class="tool-result-label">文件信息</div>
+                                <div class="tool-result-content" id="fileDetails"></div>
+                            </div>
+                            
+                            <div class="tool-section" style="margin-top: 20px;">
+                                <label class="tool-label">Base64 结果</label>
+                                <textarea class="tool-textarea" id="fileOutput" readonly placeholder="文件的Base64编码将显示在这里..."></textarea>
+                            </div>
+                            
+                            <div class="tool-actions">
+                                <button class="btn btn-primary" onclick="copyFileResult()">
+                                    <i class="fas fa-copy"></i> 复制Base64
+                                </button>
+                                <button class="btn btn-secondary" onclick="downloadBase64()">
+                                    <i class="fas fa-download"></i> 下载为文件
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            使用说明
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li><strong>Base64编码：</strong>将文本或二进制数据转换为ASCII字符串</li>
+                            <li><strong>Base64解码：</strong>将Base64字符串还原为原始数据</li>
+                            <li><strong>文件模式：</strong>支持将任意文件转换为Base64编码</li>
+                            <li>常用于在URL、Cookie、JSON中传输二进制数据</li>
+                            <li>编码后数据体积会比原始数据大约33%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const modeText = document.getElementById('modeText');
+        const modeFile = document.getElementById('modeFile');
+        const textMode = document.getElementById('textMode');
+        const fileMode = document.getElementById('fileMode');
+        const textInput = document.getElementById('textInput');
+        const textOutput = document.getElementById('textOutput');
+        const fileUpload = document.getElementById('fileUpload');
+        const fileInput = document.getElementById('fileInput');
+        const fileOutput = document.getElementById('fileOutput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileDetails = document.getElementById('fileDetails');
+        
+        let currentFile = null;
+        let currentFileBase64 = '';
+        
+        modeText.addEventListener('change', () => {
+            textMode.classList.remove('hidden');
+            fileMode.classList.add('hidden');
+        });
+        
+        modeFile.addEventListener('change', () => {
+            textMode.classList.add('hidden');
+            fileMode.classList.remove('hidden');
+        });
+        
+        function encodeBase64() {
+            try {
+                const input = textInput.value;
+                textOutput.value = btoa(unescape(encodeURIComponent(input)));
+            } catch (e) {
+                showToast('编码失败: ' + e.message);
+            }
+        }
+        
+        function decodeBase64() {
+            try {
+                const input = textInput.value.trim();
+                textOutput.value = decodeURIComponent(escape(atob(input)));
+            } catch (e) {
+                showToast('解码失败: 无效的Base64字符串');
+            }
+        }
+        
+        function swapText() {
+            const temp = textInput.value;
+            textInput.value = textOutput.value;
+            textOutput.value = temp;
+        }
+        
+        function copyTextResult() {
+            copyToClipboard(textOutput.value);
+        }
+        
+        function clearText() {
+            textInput.value = '';
+            textOutput.value = '';
+        }
+        
+        // 文件上传
+        fileUpload.addEventListener('click', () => fileInput.click());
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.classList.add('dragover');
+        });
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.classList.remove('dragover');
+        });
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFile(files[0]);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+        
+        function handleFile(file) {
+            currentFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentFileBase64 = e.target.result.split(',')[1];
+                fileOutput.value = currentFileBase64;
+                fileInfo.classList.remove('hidden');
+                fileDetails.innerHTML = `
+                    <strong>文件名:</strong> ${file.name}<br>
+                    <strong>大小:</strong> ${formatFileSize(file.size)}<br>
+                    <strong>类型:</strong> ${file.type || '未知'}
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function copyFileResult() {
+            copyToClipboard(fileOutput.value);
+        }
+        
+        function downloadBase64() {
+            if (!currentFileBase64) return;
+            const link = document.createElement('a');
+            link.href = 'data:application/octet-stream;base64,' + currentFileBase64;
+            link.download = currentFile ? currentFile.name : 'decoded_file';
+            link.click();
+        }
+    </script>
+</body>
+</html>

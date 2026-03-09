@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间戳转换 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">时间日期</div>
+                    <ul class="nav-list">
+                        <li><a href="timestamp.html" class="active"><i class="fas fa-history"></i><span>时间戳转换</span></a></li>
+                        <li><a href="countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>时间戳转换</h1>
+                    <p class="subtitle">Unix时间戳与日期时间互转</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="tool-section">
+                            <label class="tool-label">当前时间</label>
+                            <div style="padding: 16px; background: var(--bg-secondary); border-radius: var(--radius); margin-bottom: 16px;">
+                                <div style="font-size: 24px; font-weight: 600; color: var(--primary);" id="currentTime">-</div>
+                                <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;" id="currentTimestamp">-</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                            <div>
+                                <label class="tool-label">时间戳 → 日期时间</label>
+                                <input type="text" class="tool-input" id="tsInput" placeholder="输入时间戳（秒或毫秒）">
+                                <div class="tool-actions" style="margin-top: 12px;">
+                                    <button class="btn btn-primary" onclick="tsToDate()">
+                                        <i class="fas fa-arrow-down"></i> 转换
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="document.getElementById('tsInput').value = Math.floor(Date.now()/1000)">
+                                        当前
+                                    </button>
+                                </div>
+                                <div class="tool-result" style="margin-top: 12px;">
+                                    <div class="tool-result-content" id="tsResult">-</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="tool-label">日期时间 → 时间戳</label>
+                                <input type="datetime-local" class="tool-input" id="dateInput" step="1">
+                                <div class="tool-actions" style="margin-top: 12px;">
+                                    <button class="btn btn-primary" onclick="dateToTs()">
+                                        <i class="fas fa-arrow-down"></i> 转换
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="setCurrentDate()">
+                                        当前
+                                    </button>
+                                </div>
+                                <div class="tool-result" style="margin-top: 12px;">
+                                    <div class="tool-result-content" id="dateResult">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            关于时间戳
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li><strong>Unix时间戳：</strong>从1970年1月1日UTC开始经过的秒数</li>
+                            <li>秒级时间戳：10位数字（如 1704067200）</li>
+                            <li>毫秒级时间戳：13位数字（如 1704067200000）</li>
+                            <li>广泛应用于编程、数据库、API接口等领域</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        function updateCurrentTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleString('zh-CN');
+            document.getElementById('currentTimestamp').textContent = 
+                '秒级: ' + Math.floor(now.getTime()/1000) + ' | 毫秒级: ' + now.getTime();
+        }
+        
+        setInterval(updateCurrentTime, 1000);
+        updateCurrentTime();
+        
+        function setCurrentDate() {
+            const now = new Date();
+            const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+            document.getElementById('dateInput').value = local.toISOString().slice(0, 19);
+        }
+        
+        function tsToDate() {
+            const ts = document.getElementById('tsInput').value.trim();
+            if (!ts) return;
+            
+            let timestamp = parseInt(ts);
+            // 判断是秒还是毫秒
+            if (ts.length <= 10) {
+                timestamp *= 1000;
+            }
+            
+            const date = new Date(timestamp);
+            if (isNaN(date.getTime())) {
+                document.getElementById('tsResult').textContent = '无效的时间戳';
+                return;
+            }
+            
+            document.getElementById('tsResult').innerHTML = `
+                <strong>${date.toLocaleString('zh-CN')}</strong><br>
+                <small>ISO: ${date.toISOString()}</small>
+            `;
+        }
+        
+        function dateToTs() {
+            const dateStr = document.getElementById('dateInput').value;
+            if (!dateStr) return;
+            
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) {
+                document.getElementById('dateResult').textContent = '无效的日期';
+                return;
+            }
+            
+            document.getElementById('dateResult').innerHTML = `
+                <strong>秒级: ${Math.floor(date.getTime()/1000)}</strong><br>
+                <small>毫秒级: ${date.getTime()}</small>
+            `;
+        }
+    </script>
+</body>
+</html>

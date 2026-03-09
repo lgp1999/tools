@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">时间日期</div>
+                    <ul class="nav-list">
+                        <li><a href="timestamp.html"><i class="fas fa-history"></i><span>时间戳转换</span></a></li>
+                        <li><a href="countdown.html" class="active"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>倒计时</h1>
+                    <p class="subtitle">设置目标时间，开始倒计时</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box" style="text-align: center;">
+                        <div id="countdownDisplay" style="font-size: 72px; font-weight: 700; color: var(--primary); font-family: monospace; letter-spacing: 8px;">
+                            00:00:00
+                        </div>
+                        <div id="targetTime" style="font-size: 16px; color: var(--text-secondary); margin-top: 16px;">
+                            设置目标时间开始倒计时
+                        </div>
+                        
+                        <div style="margin-top: 32px;">
+                            <div class="tool-section" style="max-width: 300px; margin: 0 auto;">
+                                <input type="datetime-local" class="tool-input" id="targetInput">
+                            </div>
+                            
+                            <div class="tool-actions" style="justify-content: center; margin-top: 20px;">
+                                <button class="btn btn-primary" onclick="startCountdown()">
+                                    <i class="fas fa-play"></i> 开始
+                                </button>
+                                <button class="btn btn-secondary" onclick="pauseCountdown()">
+                                    <i class="fas fa-pause"></i> 暂停
+                                </button>
+                                <button class="btn btn-danger" onclick="resetCountdown()">
+                                    <i class="fas fa-stop"></i> 重置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-bolt"></i>
+                            快速设置
+                        </h3>
+                        <div class="tool-actions">
+                            <button class="btn btn-secondary" onclick="setQuickCountdown(1)">1分钟后</button>
+                            <button class="btn btn-secondary" onclick="setQuickCountdown(5)">5分钟后</button>
+                            <button class="btn btn-secondary" onclick="setQuickCountdown(10)">10分钟后</button>
+                            <button class="btn btn-secondary" onclick="setQuickCountdown(30)">30分钟后</button>
+                            <button class="btn btn-secondary" onclick="setQuickCountdown(60)">1小时后</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const targetTime = document.getElementById('targetTime');
+        const targetInput = document.getElementById('targetInput');
+        
+        let countdownInterval = null;
+        let targetDate = null;
+        let isPaused = false;
+        
+        function setQuickCountdown(minutes) {
+            const now = new Date();
+            targetDate = new Date(now.getTime() + minutes * 60000);
+            const local = new Date(targetDate.getTime() - targetDate.getTimezoneOffset() * 60000);
+            targetInput.value = local.toISOString().slice(0, 16);
+            startCountdown();
+        }
+        
+        function startCountdown() {
+            if (!targetInput.value && !targetDate) {
+                showToast('请先设置目标时间');
+                return;
+            }
+            
+            if (targetInput.value) {
+                targetDate = new Date(targetInput.value);
+            }
+            
+            isPaused = false;
+            clearInterval(countdownInterval);
+            updateCountdown();
+            
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        
+        function updateCountdown() {
+            if (isPaused) return;
+            
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                countdownDisplay.textContent = '00:00:00';
+                targetTime.textContent = '倒计时结束！';
+                clearInterval(countdownInterval);
+                showToast('倒计时结束！');
+                return;
+            }
+            
+            const hours = Math.floor(diff / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            
+            countdownDisplay.textContent = 
+                String(hours).padStart(2, '0') + ':' +
+                String(minutes).padStart(2, '0') + ':' +
+                String(seconds).padStart(2, '0');
+            
+            targetTime.textContent = '目标时间: ' + targetDate.toLocaleString('zh-CN');
+        }
+        
+        function pauseCountdown() {
+            isPaused = !isPaused;
+        }
+        
+        function resetCountdown() {
+            clearInterval(countdownInterval);
+            countdownDisplay.textContent = '00:00:00';
+            targetTime.textContent = '设置目标时间开始倒计时';
+            targetInput.value = '';
+            targetDate = null;
+            isPaused = false;
+        }
+    </script>
+</body>
+</html>

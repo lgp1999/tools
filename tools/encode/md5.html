@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD5加密 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">热门工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../../index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="md5.html" class="active"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="md5.html" class="active"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="sha.html"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <div class="nav-title">友情链接</div>
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>MD5加密</h1>
+                    <p class="subtitle">计算字符串的MD5哈希值</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="tool-section">
+                            <label class="tool-label">输入文本</label>
+                            <textarea class="tool-textarea" id="inputText" placeholder="在此输入要加密的文本..."></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="calculateMD5()">
+                                <i class="fas fa-lock"></i> 计算MD5
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyResult()">
+                                <i class="fas fa-copy"></i> 复制结果
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-result" style="margin-top: 20px;">
+                            <div class="tool-result-label">MD5 结果 (32位小写)</div>
+                            <div class="tool-result-content" id="result" style="font-family: monospace; font-size: 16px;">-</div>
+                        </div>
+                        
+                        <div class="tool-result">
+                            <div class="tool-result-label">MD5 结果 (32位大写)</div>
+                            <div class="tool-result-content" id="resultUpper" style="font-family: monospace; font-size: 16px;">-</div>
+                        </div>
+                        
+                        <div class="tool-result">
+                            <div class="tool-result-label">MD5 结果 (16位小写)</div>
+                            <div class="tool-result-content" id="result16" style="font-family: monospace; font-size: 16px;">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            关于 MD5
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li>MD5 (Message-Digest Algorithm 5) 是一种广泛使用的哈希算法</li>
+                            <li>产生128位（16字节）的哈希值，通常表示为32位十六进制数</li>
+                            <li>常用于验证文件完整性、存储密码（不建议单独使用）</li>
+                            <li><strong>注意：</strong>MD5已不再安全，重要场景建议使用SHA-256</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const resultEl = document.getElementById('result');
+        const resultUpperEl = document.getElementById('resultUpper');
+        const result16El = document.getElementById('result16');
+        
+        inputText.addEventListener('input', debounce(calculateMD5, 300));
+        
+        function calculateMD5() {
+            const text = inputText.value;
+            if (!text) {
+                resultEl.textContent = '-';
+                resultUpperEl.textContent = '-';
+                result16El.textContent = '-';
+                return;
+            }
+            
+            const hash = MD5.encode(text);
+            resultEl.textContent = hash;
+            resultUpperEl.textContent = hash.toUpperCase();
+            result16El.textContent = hash.substring(8, 24);
+        }
+        
+        function copyResult() {
+            copyToClipboard(resultEl.textContent);
+        }
+        
+        function clearAll() {
+            inputText.value = '';
+            resultEl.textContent = '-';
+            resultUpperEl.textContent = '-';
+            result16El.textContent = '-';
+        }
+    </script>
+</body>
+</html>

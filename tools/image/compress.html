@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">图片工具</div>
+                    <ul class="nav-list">
+                        <li><a href="base64.html"><i class="fas fa-image"></i><span>图片Base64</span></a></li>
+                        <li><a href="compress.html" class="active"><i class="fas fa-compress"></i><span>图片压缩</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>图片压缩</h1>
+                    <p class="subtitle">在线压缩图片文件大小</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="file-upload" id="fileUpload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>拖拽图片到此处，或点击上传</p>
+                            <p class="file-hint">支持 JPG、PNG 格式</p>
+                            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div id="compressSection" class="hidden">
+                            <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px;">
+                                <div style="flex: 1; min-width: 200px;">
+                                    <label class="tool-label">原图</label>
+                                    <img id="originalPreview" style="max-width: 100%; max-height: 250px; border: 1px solid var(--border-color); border-radius: var(--radius);">
+                                    <div id="originalInfo" style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);"></div>
+                                </div>
+                                <div style="flex: 1; min-width: 200px;">
+                                    <label class="tool-label">压缩后</label>
+                                    <img id="compressedPreview" style="max-width: 100%; max-height: 250px; border: 1px solid var(--border-color); border-radius: var(--radius);">
+                                    <div id="compressedInfo" style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 24px;">
+                                <label class="tool-label">压缩质量: <span id="qualityVal">80</span>%</label>
+                                <input type="range" id="quality" min="10" max="100" value="80" style="width: 100%;">
+                                <div class="tool-actions" style="margin-top: 16px;">
+                                    <button class="btn btn-primary" onclick="compressImage()">
+                                        <i class="fas fa-compress"></i> 重新压缩
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadImage()">
+                                        <i class="fas fa-download"></i> 下载压缩图片
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const fileUpload = document.getElementById('fileUpload');
+        const fileInput = document.getElementById('fileInput');
+        const compressSection = document.getElementById('compressSection');
+        const originalPreview = document.getElementById('originalPreview');
+        const compressedPreview = document.getElementById('compressedPreview');
+        const originalInfo = document.getElementById('originalInfo');
+        const compressedInfo = document.getElementById('compressedInfo');
+        const quality = document.getElementById('quality');
+        const qualityVal = document.getElementById('qualityVal');
+        
+        let currentFile = null;
+        let compressedDataUrl = null;
+        
+        fileUpload.addEventListener('click', () => fileInput.click());
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.classList.add('dragover');
+        });
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.classList.remove('dragover');
+        });
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFile(files[0]);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+        
+        quality.addEventListener('input', () => {
+            qualityVal.textContent = quality.value;
+        });
+        
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('请选择图片文件');
+                return;
+            }
+            
+            currentFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalPreview.src = e.target.result;
+                originalInfo.innerHTML = `
+                    <strong>文件名:</strong> ${file.name}<br>
+                    <strong>大小:</strong> ${formatFileSize(file.size)}
+                `;
+                compressSection.classList.remove('hidden');
+                compressImage();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function compressImage() {
+            if (!currentFile) return;
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                
+                const qualityValue = parseInt(quality.value) / 100;
+                compressedDataUrl = canvas.toDataURL('image/jpeg', qualityValue);
+                compressedPreview.src = compressedDataUrl;
+                
+                // 计算压缩后大小
+                const base64 = compressedDataUrl.split(',')[1];
+                const size = Math.ceil(base64.length * 3 / 4);
+                const ratio = ((1 - size / currentFile.size) * 100).toFixed(1);
+                
+                compressedInfo.innerHTML = `
+                    <strong>压缩后大小:</strong> ${formatFileSize(size)}<br>
+                    <strong>压缩率:</strong> ${ratio}%
+                `;
+            };
+            img.src = originalPreview.src;
+        }
+        
+        function downloadImage() {
+            if (!compressedDataUrl) return;
+            const link = document.createElement('a');
+            link.href = compressedDataUrl;
+            link.download = 'compressed_' + currentFile.name.replace(/\.[^/.]+$/, '.jpg');
+            link.click();
+        }
+    </script>
+</body>
+</html>

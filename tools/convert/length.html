@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长度转换 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">单位转换</div>
+                    <ul class="nav-list">
+                        <li><a href="length.html" class="active"><i class="fas fa-ruler"></i><span>长度转换</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>长度转换</h1>
+                    <p class="subtitle">各种长度单位之间的转换</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="convert-row">
+                            <input type="number" class="tool-input" id="inputValue" placeholder="输入数值" value="1">
+                            <select class="tool-select" id="fromUnit" style="width: 150px;">
+                                <option value="m">米 (m)</option>
+                                <option value="km">千米 (km)</option>
+                                <option value="cm">厘米 (cm)</option>
+                                <option value="mm">毫米 (mm)</option>
+                                <option value="in">英寸 (in)</option>
+                                <option value="ft">英尺 (ft)</option>
+                                <option value="yd">码 (yd)</option>
+                                <option value="mi">英里 (mi)</option>
+                            </select>
+                            <button class="convert-swap" onclick="swapUnits()">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <input type="text" class="tool-input" id="outputValue" readonly placeholder="结果">
+                            <select class="tool-select" id="toUnit" style="width: 150px;">
+                                <option value="m">米 (m)</option>
+                                <option value="km" selected>千米 (km)</option>
+                                <option value="cm">厘米 (cm)</option>
+                                <option value="mm">毫米 (mm)</option>
+                                <option value="in">英寸 (in)</option>
+                                <option value="ft">英尺 (ft)</option>
+                                <option value="yd">码 (yd)</option>
+                                <option value="mi">英里 (mi)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="convert()">
+                                <i class="fas fa-exchange-alt"></i> 转换
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyResult()">
+                                <i class="fas fa-copy"></i> 复制
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-table"></i>
+                            常用换算表
+                        </h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>单位</th>
+                                    <th>换算为米</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1 千米 (km)</td><td>1000 米</td></tr>
+                                <tr><td>1 米 (m)</td><td>1 米</td></tr>
+                                <tr><td>1 厘米 (cm)</td><td>0.01 米</td></tr>
+                                <tr><td>1 毫米 (mm)</td><td>0.001 米</td></tr>
+                                <tr><td>1 英寸 (in)</td><td>0.0254 米</td></tr>
+                                <tr><td>1 英尺 (ft)</td><td>0.3048 米</td></tr>
+                                <tr><td>1 码 (yd)</td><td>0.9144 米</td></tr>
+                                <tr><td>1 英里 (mi)</td><td>1609.344 米</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const inputValue = document.getElementById('inputValue');
+        const fromUnit = document.getElementById('fromUnit');
+        const outputValue = document.getElementById('outputValue');
+        const toUnit = document.getElementById('toUnit');
+        
+        const toMeters = {
+            m: 1,
+            km: 1000,
+            cm: 0.01,
+            mm: 0.001,
+            in: 0.0254,
+            ft: 0.3048,
+            yd: 0.9144,
+            mi: 1609.344
+        };
+        
+        function convert() {
+            const value = parseFloat(inputValue.value);
+            if (isNaN(value)) {
+                outputValue.value = '';
+                return;
+            }
+            
+            const from = toMeters[fromUnit.value];
+            const to = toMeters[toUnit.value];
+            const result = value * from / to;
+            
+            outputValue.value = result.toLocaleString('zh-CN', { maximumFractionDigits: 10 });
+        }
+        
+        function swapUnits() {
+            const temp = fromUnit.value;
+            fromUnit.value = toUnit.value;
+            toUnit.value = temp;
+            convert();
+        }
+        
+        function copyResult() {
+            copyToClipboard(outputValue.value);
+        }
+        
+        inputValue.addEventListener('input', convert);
+        fromUnit.addEventListener('change', convert);
+        toUnit.addEventListener('change', convert);
+        
+        // 初始转换
+        convert();
+    </script>
+</body>
+</html>

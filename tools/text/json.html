@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON格式化 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">热门工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../../index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="json.html" class="active"><i class="fas fa-code"></i><span>JSON格式化</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="json.html" class="active"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                        <li><a href="markdown.html"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="../encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="../encode/md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <div class="nav-title">友情链接</div>
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>JSON格式化</h1>
+                    <p class="subtitle">JSON 美化、压缩、校验和转换</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="options-group">
+                            <div class="option-item">
+                                <input type="checkbox" id="autoFormat" checked>
+                                <label for="autoFormat">自动格式化</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="sortKeys">
+                                <label for="sortKeys">按键排序</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" id="escapeUnicode">
+                                <label for="escapeUnicode">转义Unicode</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-section">
+                            <label class="tool-label">输入 JSON</label>
+                            <textarea class="tool-textarea" id="jsonInput" placeholder="在此粘贴JSON数据...
+
+示例:
+{
+  \"name\": \"ToolBox\",
+  \"version\": \"1.0\",
+  \"features\": [\"JSON格式化\", \"Base64转换\", \"MD5加密\"]
+}"></textarea>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="formatJSON()">
+                                <i class="fas fa-code"></i> 格式化
+                            </button>
+                            <button class="btn btn-secondary" onclick="compressJSON()">
+                                <i class="fas fa-compress"></i> 压缩
+                            </button>
+                            <button class="btn btn-secondary" onclick="escapeJSON()">
+                                <i class="fas fa-terminal"></i> 转义
+                            </button>
+                            <button class="btn btn-secondary" onclick="unescapeJSON()">
+                                <i class="fas fa-remove-format"></i> 去转义
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyResult()">
+                                <i class="fas fa-copy"></i> 复制结果
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-section" style="margin-top: 20px;">
+                            <label class="tool-label">处理结果</label>
+                            <textarea class="tool-textarea" id="jsonOutput" readonly placeholder="处理后的JSON将显示在这里..."></textarea>
+                        </div>
+                        
+                        <div id="errorMsg" class="tool-result hidden" style="background: #fef2f2; border-color: #fecaca;">
+                            <div class="tool-result-label" style="color: #dc2626;">错误</div>
+                            <div class="tool-result-content" id="errorContent" style="color: #991b1b;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            使用说明
+                        </h3>
+                        <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
+                            <li><strong>格式化：</strong>将压缩的JSON转换为易读的格式化文本</li>
+                            <li><strong>压缩：</strong>删除所有不必要的空格，减小JSON体积</li>
+                            <li><strong>转义：</strong>将JSON字符串中的特殊字符进行转义</li>
+                            <li><strong>去转义：</strong>将转义后的JSON字符串还原</li>
+                            <li>所有操作均在浏览器本地进行，不会上传到服务器</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const jsonInput = document.getElementById('jsonInput');
+        const jsonOutput = document.getElementById('jsonOutput');
+        const errorMsg = document.getElementById('errorMsg');
+        const errorContent = document.getElementById('errorContent');
+        const autoFormat = document.getElementById('autoFormat');
+        
+        jsonInput.addEventListener('input', debounce(() => {
+            if (autoFormat.checked) formatJSON();
+        }, 500));
+        
+        function formatJSON() {
+            try {
+                const input = jsonInput.value.trim();
+                if (!input) {
+                    jsonOutput.value = '';
+                    hideError();
+                    return;
+                }
+                
+                let obj = JSON.parse(input);
+                
+                if (document.getElementById('sortKeys').checked) {
+                    obj = sortObjectKeys(obj);
+                }
+                
+                let output = JSON.stringify(obj, null, 2);
+                
+                if (document.getElementById('escapeUnicode').checked) {
+                    output = JSON.stringify(obj);
+                }
+                
+                jsonOutput.value = output;
+                hideError();
+            } catch (e) {
+                showError('JSON格式错误: ' + e.message);
+            }
+        }
+        
+        function compressJSON() {
+            try {
+                const input = jsonInput.value.trim();
+                if (!input) return;
+                
+                const obj = JSON.parse(input);
+                jsonOutput.value = JSON.stringify(obj);
+                hideError();
+            } catch (e) {
+                showError('JSON格式错误: ' + e.message);
+            }
+        }
+        
+        function escapeJSON() {
+            const input = jsonInput.value.trim();
+            if (!input) return;
+            jsonOutput.value = JSON.stringify(input).slice(1, -1);
+        }
+        
+        function unescapeJSON() {
+            const input = jsonInput.value.trim();
+            if (!input) return;
+            try {
+                jsonOutput.value = JSON.parse('"' + input + '"');
+            } catch (e) {
+                showError('转义格式错误');
+            }
+        }
+        
+        function copyResult() {
+            copyToClipboard(jsonOutput.value);
+        }
+        
+        function clearAll() {
+            jsonInput.value = '';
+            jsonOutput.value = '';
+            hideError();
+        }
+        
+        function showError(msg) {
+            errorMsg.classList.remove('hidden');
+            errorContent.textContent = msg;
+        }
+        
+        function hideError() {
+            errorMsg.classList.add('hidden');
+        }
+        
+        function sortObjectKeys(obj) {
+            if (typeof obj !== 'object' || obj === null) return obj;
+            if (Array.isArray(obj)) return obj.map(sortObjectKeys);
+            
+            const sorted = {};
+            Object.keys(obj).sort().forEach(key => {
+                sorted[key] = sortObjectKeys(obj[key]);
+            });
+            return sorted;
+        }
+    </script>
+</body>
+</html>

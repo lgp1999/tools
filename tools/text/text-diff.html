@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本对比 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="json.html"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="text-diff.html" class="active"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>文本对比</h1>
+                    <p class="subtitle">比较两段文本的差异</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div>
+                                <label class="tool-label">原始文本</label>
+                                <textarea class="tool-textarea" id="text1" placeholder="输入原始文本..."></textarea>
+                            </div>
+                            <div>
+                                <label class="tool-label">对比文本</label>
+                                <textarea class="tool-textarea" id="text2" placeholder="输入对比文本..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-actions">
+                            <button class="btn btn-primary" onclick="compareText()">
+                                <i class="fas fa-not-equal"></i> 对比差异
+                            </button>
+                            <button class="btn btn-secondary" onclick="swapText()">
+                                <i class="fas fa-exchange-alt"></i> 交换
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                        
+                        <div class="tool-section" style="margin-top: 20px;">
+                            <label class="tool-label">对比结果</label>
+                            <div id="diffResult" style="padding: 16px; background: var(--bg-secondary); border-radius: var(--radius); min-height: 100px; font-family: monospace; font-size: 13px; line-height: 1.8; white-space: pre-wrap;">
+                                点击"对比差异"查看结果
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const diffResult = document.getElementById('diffResult');
+        
+        function compareText() {
+            const t1 = text1.value;
+            const t2 = text2.value;
+            
+            if (!t1 && !t2) {
+                diffResult.textContent = '请输入文本进行对比';
+                return;
+            }
+            
+            if (t1 === t2) {
+                diffResult.innerHTML = '<span style="color: var(--success);">✓ 两段文本完全相同</span>';
+                return;
+            }
+            
+            // 简单的行对比
+            const lines1 = t1.split('\n');
+            const lines2 = t2.split('\n');
+            const maxLines = Math.max(lines1.length, lines2.length);
+            let html = '';
+            
+            for (let i = 0; i < maxLines; i++) {
+                const line1 = lines1[i] || '';
+                const line2 = lines2[i] || '';
+                
+                if (line1 === line2) {
+                    html += `<div style="color: var(--text-secondary);">${escapeHtml(line1)}</div>`;
+                } else {
+                    if (line1) html += `<div style="background: #fee2e2; color: #991b1b; padding: 2px 8px; margin: 2px 0;">- ${escapeHtml(line1)}</div>`;
+                    if (line2) html += `<div style="background: #dcfce7; color: #166534; padding: 2px 8px; margin: 2px 0;">+ ${escapeHtml(line2)}</div>`;
+                }
+            }
+            
+            diffResult.innerHTML = html;
+        }
+        
+        function swapText() {
+            const temp = text1.value;
+            text1.value = text2.value;
+            text2.value = temp;
+        }
+        
+        function clearAll() {
+            text1.value = '';
+            text2.value = '';
+            diffResult.textContent = '点击"对比差异"查看结果';
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || ' ';
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

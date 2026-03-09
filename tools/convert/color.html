@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色转换 - ToolBox Pro</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-toolbox"></i>
+                    <span>ToolBox Pro</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索工具..." id="searchInput" autocomplete="off">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-title">办公辅助</div>
+                    <ul class="nav-list">
+                        <li><a href="../office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                        <li><a href="../office/password.html"><i class="fas fa-key"></i><span>密码生成</span></a></li>
+                        <li><a href="color.html" class="active"><i class="fas fa-palette"></i><span>颜色转换</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="friend-links">
+                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>TapSave</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>颜色转换</h1>
+                    <p class="subtitle">HEX、RGB、HSL 颜色格式互转</p>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="tool-container">
+                    <div class="tool-box">
+                        <div class="color-preview" id="colorPreview" style="width: 100%; height: 120px; border-radius: var(--radius); border: 1px solid var(--border-color);"></div>
+                        
+                        <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                            <div>
+                                <label class="tool-label">HEX</label>
+                                <div class="color-input-group" style="display: flex; gap: 8px;">
+                                    <span style="padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius);">#</span>
+                                    <input type="text" class="tool-input" id="hexInput" placeholder="FF5733" maxlength="8">
+                                    <input type="color" id="colorPicker" style="width: 44px; height: 42px; padding: 0; border: 1px solid var(--border-color); border-radius: var(--radius); cursor: pointer;">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="tool-label">RGB</label>
+                                <input type="text" class="tool-input" id="rgbInput" placeholder="rgb(255, 87, 51)">
+                            </div>
+                            
+                            <div>
+                                <label class="tool-label">HSL</label>
+                                <input type="text" class="tool-input" id="hslInput" placeholder="hsl(9, 100%, 60%)">
+                            </div>
+                            
+                            <div>
+                                <label class="tool-label">RGBA</label>
+                                <input type="text" class="tool-input" id="rgbaInput" placeholder="rgba(255, 87, 51, 1)">
+                            </div>
+                        </div>
+                        
+                        <div class="tool-actions" style="margin-top: 24px;">
+                            <button class="btn btn-primary" onclick="copyAllFormats()">
+                                <i class="fas fa-copy"></i> 复制所有格式
+                            </button>
+                            <button class="btn btn-secondary" onclick="randomColor()">
+                                <i class="fas fa-dice"></i> 随机颜色
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearAll()">
+                                <i class="fas fa-trash"></i> 清空
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-box">
+                        <h3 class="section-title">
+                            <i class="fas fa-swatchbook"></i>
+                            预设颜色
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 12px;">
+                            <button onclick="setColor('#ef4444')" style="width: 60px; height: 60px; background: #ef4444; border: none; border-radius: var(--radius); cursor: pointer;" title="Red"></button>
+                            <button onclick="setColor('#f97316')" style="width: 60px; height: 60px; background: #f97316; border: none; border-radius: var(--radius); cursor: pointer;" title="Orange"></button>
+                            <button onclick="setColor('#f59e0b')" style="width: 60px; height: 60px; background: #f59e0b; border: none; border-radius: var(--radius); cursor: pointer;" title="Amber"></button>
+                            <button onclick="setColor('#84cc16')" style="width: 60px; height: 60px; background: #84cc16; border: none; border-radius: var(--radius); cursor: pointer;" title="Lime"></button>
+                            <button onclick="setColor('#22c55e')" style="width: 60px; height: 60px; background: #22c55e; border: none; border-radius: var(--radius); cursor: pointer;" title="Green"></button>
+                            <button onclick="setColor('#06b6d4')" style="width: 60px; height: 60px; background: #06b6d4; border: none; border-radius: var(--radius); cursor: pointer;" title="Cyan"></button>
+                            <button onclick="setColor('#3b82f6')" style="width: 60px; height: 60px; background: #3b82f6; border: none; border-radius: var(--radius); cursor: pointer;" title="Blue"></button>
+                            <button onclick="setColor('#6366f1')" style="width: 60px; height: 60px; background: #6366f1; border: none; border-radius: var(--radius); cursor: pointer;" title="Indigo"></button>
+                            <button onclick="setColor('#8b5cf6')" style="width: 60px; height: 60px; background: #8b5cf6; border: none; border-radius: var(--radius); cursor: pointer;" title="Violet"></button>
+                            <button onclick="setColor('#ec4899')" style="width: 60px; height: 60px; background: #ec4899; border: none; border-radius: var(--radius); cursor: pointer;" title="Pink"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="copyright">
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        const hexInput = document.getElementById('hexInput');
+        const rgbInput = document.getElementById('rgbInput');
+        const hslInput = document.getElementById('hslInput');
+        const rgbaInput = document.getElementById('rgbaInput');
+        const colorPicker = document.getElementById('colorPicker');
+        const colorPreview = document.getElementById('colorPreview');
+        
+        let currentColor = { r: 255, g: 87, b: 51, a: 1 };
+        
+        function updatePreview() {
+            const rgba = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${currentColor.a})`;
+            colorPreview.style.background = rgba;
+            colorPicker.value = rgbToHex(currentColor.r, currentColor.g, currentColor.b);
+        }
+        
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+        
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+        
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+        
+        function updateAllFormats() {
+            hexInput.value = rgbToHex(currentColor.r, currentColor.g, currentColor.b).slice(1);
+            rgbInput.value = `rgb(${currentColor.r}, ${currentColor.g}, ${currentColor.b})`;
+            rgbaInput.value = `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${currentColor.a})`;
+            const hsl = rgbToHsl(currentColor.r, currentColor.g, currentColor.b);
+            hslInput.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            updatePreview();
+        }
+        
+        hexInput.addEventListener('input', () => {
+            const hex = hexInput.value;
+            if (hex.length >= 6) {
+                const rgb = hexToRgb(hex);
+                if (rgb) {
+                    currentColor = { ...rgb, a: 1 };
+                    updateAllFormats();
+                }
+            }
+        });
+        
+        colorPicker.addEventListener('input', () => {
+            const rgb = hexToRgb(colorPicker.value);
+            if (rgb) {
+                currentColor = { ...rgb, a: 1 };
+                updateAllFormats();
+            }
+        });
+        
+        function setColor(color) {
+            const rgb = hexToRgb(color);
+            if (rgb) {
+                currentColor = { ...rgb, a: 1 };
+                updateAllFormats();
+            }
+        }
+        
+        function randomColor() {
+            currentColor = {
+                r: Math.floor(Math.random() * 256),
+                g: Math.floor(Math.random() * 256),
+                b: Math.floor(Math.random() * 256),
+                a: 1
+            };
+            updateAllFormats();
+        }
+        
+        function copyAllFormats() {
+            const text = `HEX: #${hexInput.value}
+RGB: ${rgbInput.value}
+RGBA: ${rgbaInput.value}
+HSL: ${hslInput.value}`;
+            copyToClipboard(text);
+        }
+        
+        function clearAll() {
+            hexInput.value = '';
+            rgbInput.value = '';
+            hslInput.value = '';
+            rgbaInput.value = '';
+            currentColor = { r: 255, g: 255, b: 255, a: 1 };
+            updatePreview();
+        }
+        
+        // 初始化
+        updateAllFormats();
+    </script>
+</body>
+</html>
