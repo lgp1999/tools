@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -43,9 +43,9 @@
             </nav>
             <div class="friend-links">
                 <div class="nav-title">友情链接</div>
-                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
-                    <span>TapSave</span>
+                    <span>抖音视频下载 - TapSave</span>
                 </a>
             </div>
         </aside>
@@ -84,7 +84,7 @@
                                     <i class="fas fa-arrow-down"></i> 编码 →
                                 </button>
                                 <button class="btn btn-primary" onclick="decodeBase64()">
-                                    <i class="fas fa-arrow-up"></i> ← 解码
+                                    <i class="fas fa-arrow-up"></i> 解码
                                 </button>
                                 <button class="btn btn-secondary" onclick="swapText()">
                                     <i class="fas fa-exchange-alt"></i> 交换
@@ -152,7 +152,7 @@
             <footer class="footer">
                 <div class="footer-content">
                     <p class="copyright">
-                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/zh/douyin/" target="_blank">合作伙伴：TapSave</a>
                     </p>
                 </div>
             </footer>
@@ -200,7 +200,7 @@
                 const input = textInput.value.trim();
                 textOutput.value = decodeURIComponent(escape(atob(input)));
             } catch (e) {
-                showToast('解码失败: 无效的Base64字符串');
+                showToast('解码失败: 无效的Base64字符化);
             }
         }
         
@@ -246,7 +246,7 @@
                 fileOutput.value = currentFileBase64;
                 fileInfo.classList.remove('hidden');
                 fileDetails.innerHTML = `
-                    <strong>文件名:</strong> ${file.name}<br>
+                    <strong>文件</strong> ${file.name}<br>
                     <strong>大小:</strong> ${formatFileSize(file.size)}<br>
                     <strong>类型:</strong> ${file.type || '未知'}
                 `;
@@ -268,3 +268,6 @@
     </script>
 </body>
 </html>
+
+
+

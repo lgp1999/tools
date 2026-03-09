@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -33,9 +33,9 @@
                 </div>
             </nav>
             <div class="friend-links">
-                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
-                    <span>TapSave</span>
+                    <span>抖音视频下载 - TapSave</span>
                 </a>
             </div>
         </aside>
@@ -53,7 +53,7 @@
                     <div class="tool-box">
                         <div class="file-upload" id="fileUpload">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <p>拖拽图片到此处，或点击上传</p>
+                            <p>拖拽图片到此处，或点击上</p>
                             <p class="file-hint">支持 JPG、PNG、GIF、WebP 格式</p>
                             <input type="file" id="fileInput" accept="image/*" style="display: none;">
                         </div>
@@ -81,11 +81,11 @@
                         </div>
                         
                         <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-color);">
-                            <label class="tool-label">Base64 转图片</label>
-                            <textarea class="tool-textarea" id="base64Input" placeholder="在此粘贴Base64编码（包含 data:image 前缀或纯Base64字符串）..."></textarea>
+                            <label class="tool-label">Base64 转图</label>
+                            <textarea class="tool-textarea" id="base64Input" placeholder="在此粘贴Base64编码（包化data:image 前缀或纯Base64字符串）..."></textarea>
                             <div class="tool-actions" style="margin-top: 12px;">
                                 <button class="btn btn-primary" onclick="base64ToImage()">
-                                    <i class="fas fa-image"></i> 转换为图片
+                                    <i class="fas fa-image"></i> 转换为图化
                                 </button>
                                 <button class="btn btn-secondary" onclick="document.getElementById('base64Input').value = ''">
                                     <i class="fas fa-trash"></i> 清空
@@ -100,7 +100,7 @@
             <footer class="footer">
                 <div class="footer-content">
                     <p class="copyright">
-                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/zh/douyin/" target="_blank">合作伙伴：TapSave</a>
                     </p>
                 </div>
             </footer>
@@ -150,7 +150,7 @@
                 imagePreview.src = e.target.result;
                 base64Output.value = e.target.result;
                 imageInfo.innerHTML = `
-                    <strong>文件名:</strong> ${file.name}<br>
+                    <strong>文件</strong> ${file.name}<br>
                     <strong>大小:</strong> ${formatFileSize(file.size)}<br>
                     <strong>类型:</strong> ${file.type}<br>
                     <strong>Base64大小:</strong> ${formatFileSize(e.target.result.length)}
@@ -176,7 +176,7 @@
             let base64 = base64Input.value.trim();
             if (!base64) return;
             
-            // 如果没有 data:image 前缀，尝试添加
+            // 如果没有 data:image 前缀，尝试添化
             if (!base64.startsWith('data:image')) {
                 base64 = 'data:image/png;base64,' + base64;
             }
@@ -198,3 +198,6 @@
     </script>
 </body>
 </html>
+
+
+

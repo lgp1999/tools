@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正则表达式测试 - ToolBox Pro</title>
+    <title>正则表达式测化- ToolBox Pro</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -25,7 +25,7 @@
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-section">
-                    <div class="nav-title">开发工具</div>
+                    <div class="nav-title">开发工化/div>
                     <ul class="nav-list">
                         <li><a href="uuid.html"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
                         <li><a href="regex.html" class="active"><i class="fas fa-spell-check"></i><span>正则测试</span></a></li>
@@ -33,9 +33,9 @@
                 </div>
             </nav>
             <div class="friend-links">
-                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
-                    <span>TapSave</span>
+                    <span>抖音视频下载 - TapSave</span>
                 </a>
             </div>
         </aside>
@@ -43,7 +43,7 @@
         <main class="main-content">
             <header class="top-header">
                 <div class="header-left">
-                    <h1>正则表达式测试</h1>
+                    <h1>正则表达式测</h1>
                     <p class="subtitle">在线测试和调试正则表达式</p>
                 </div>
             </header>
@@ -52,10 +52,10 @@
                 <div class="tool-container">
                     <div class="tool-box">
                         <div class="tool-section">
-                            <label class="tool-label">正则表达式</label>
+                            <label class="tool-label">正则表达</label>
                             <div style="display: flex; gap: 8px;">
                                 <span style="padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius) 0 0 var(--radius); font-family: monospace;">/</span>
-                                <input type="text" class="tool-input" id="regexPattern" placeholder="输入正则表达式，如: \d+" style="border-radius: 0; font-family: monospace;">
+                                <input type="text" class="tool-input" id="regexPattern" placeholder="输入正则表达式，化 \d+" style="border-radius: 0; font-family: monospace;">
                                 <span style="padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-left: none; border-right: none; font-family: monospace;">/</span>
                                 <input type="text" class="tool-input" id="regexFlags" placeholder="flags" value="g" style="width: 80px; border-radius: 0 var(--radius) var(--radius) 0; font-family: monospace;">
                             </div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="option-item">
                                 <input type="checkbox" id="flagIgnore">
-                                <label for="flagIgnore">i (忽略大小写)</label>
+                                <label for="flagIgnore">i (忽略大小</label>
                             </div>
                             <div class="option-item">
                                 <input type="checkbox" id="flagMultiline">
@@ -104,13 +104,13 @@
                     <div class="tool-box">
                         <h3 class="section-title">
                             <i class="fas fa-book"></i>
-                            常用正则表达式
+                            常用正则表达化
                         </h3>
                         <table style="font-size: 13px;">
                             <thead>
                                 <tr>
                                     <th>描述</th>
-                                    <th>正则表达式</th>
+                                    <th>正则表达</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -121,7 +121,7 @@
                                     <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('[\\w.-]+@[\\w.-]+\\.\\w+')">使用</button></td>
                                 </tr>
                                 <tr>
-                                    <td>手机号</td>
+                                    <td>手机</td>
                                     <td><code>1[3-9]\d{9}</code></td>
                                     <td><button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="usePattern('1[3-9]\\d{9}')">使用</button></td>
                                 </tr>
@@ -154,7 +154,7 @@
             <footer class="footer">
                 <div class="footer-content">
                     <p class="copyright">
-                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/zh/douyin/" target="_blank">合作伙伴：TapSave</a>
                     </p>
                 </div>
             </footer>
@@ -169,7 +169,7 @@
         const matchResult = document.getElementById('matchResult');
         const replaceResult = document.getElementById('replaceResult');
         
-        // 标志位联动
+        // 标志位联化
         document.getElementById('flagGlobal').addEventListener('change', updateFlags);
         document.getElementById('flagIgnore').addEventListener('change', updateFlags);
         document.getElementById('flagMultiline').addEventListener('change', updateFlags);
@@ -188,7 +188,7 @@
             const text = testText.value;
             
             if (!pattern || !text) {
-                matchResult.textContent = '请输入正则表达式和测试文本';
+                matchResult.textContent = '请输入正则表达式和测试文化;
                 return;
             }
             
@@ -197,18 +197,18 @@
                 const matches = text.match(regex);
                 
                 if (matches) {
-                    matchResult.innerHTML = `<strong>找到 ${matches.length} 个匹配:</strong><br>` + 
+                    matchResult.innerHTML = `<strong>找到 ${matches.length} 个匹</strong><br>` + 
                         matches.map((m, i) => `[${i+1}] ${escapeHtml(m)}`).join('<br>');
                     
                     // 高亮显示
                     const highlighted = text.replace(regex, match => `<mark>${escapeHtml(match)}</mark>`);
                     replaceResult.innerHTML = highlighted;
                 } else {
-                    matchResult.textContent = '未找到匹配';
+                    matchResult.textContent = '未找到匹化;
                     replaceResult.textContent = text;
                 }
             } catch (e) {
-                matchResult.textContent = '正则表达式错误: ' + e.message;
+                matchResult.textContent = '正则表达式错化 ' + e.message;
             }
         }
         
@@ -232,3 +232,6 @@
     </script>
 </body>
 </html>
+
+
+

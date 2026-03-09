@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -34,9 +34,9 @@
                 </div>
             </nav>
             <div class="friend-links">
-                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
-                    <span>TapSave</span>
+                    <span>抖音视频下载 - TapSave</span>
                 </a>
             </div>
         </aside>
@@ -45,7 +45,7 @@
             <header class="top-header">
                 <div class="header-left">
                     <h1>URL编码/解码</h1>
-                    <p class="subtitle">URL特殊字符编码与解码</p>
+                    <p class="subtitle">URL特殊字符编码与解</p>
                 </div>
             </header>
             
@@ -55,21 +55,21 @@
                         <div class="options-group">
                             <div class="option-item">
                                 <input type="checkbox" id="encodeAll" checked>
-                                <label for="encodeAll">编码所有字符（包括字母数字）</label>
+                                <label for="encodeAll">编码所有字符（包括字母数字</label>
                             </div>
                         </div>
                         
                         <div class="tool-section">
                             <label class="tool-label">输入内容</label>
-                            <textarea class="tool-textarea" id="inputText" placeholder="在此输入要编码或解码的内容..."></textarea>
+                            <textarea class="tool-textarea" id="inputText" placeholder="在此输入要编码或解码的内化.."></textarea>
                         </div>
                         
                         <div class="tool-actions">
                             <button class="btn btn-primary" onclick="encodeURL()">
-                                <i class="fas fa-arrow-down"></i> 编码 →
+                                <i class="fas fa-arrow-down"></i> 编码 化
                             </button>
                             <button class="btn btn-primary" onclick="decodeURL()">
-                                <i class="fas fa-arrow-up"></i> ← 解码
+                                <i class="fas fa-arrow-up"></i> 化解码
                             </button>
                             <button class="btn btn-secondary" onclick="swapText()">
                                 <i class="fas fa-exchange-alt"></i> 交换
@@ -84,7 +84,7 @@
                         
                         <div class="tool-section" style="margin-top: 20px;">
                             <label class="tool-label">结果</label>
-                            <textarea class="tool-textarea" id="outputText" readonly placeholder="编码或解码结果将显示在这里..."></textarea>
+                            <textarea class="tool-textarea" id="outputText" readonly placeholder="编码或解码结果将显示在这化.."></textarea>
                         </div>
                     </div>
                     
@@ -94,10 +94,10 @@
                             使用说明
                         </h3>
                         <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
-                            <li><strong>URL编码：</strong>将特殊字符转换为%xx格式</li>
-                            <li><strong>URL解码：</strong>将%xx格式的编码还原为原字符</li>
-                            <li>常用于URL参数传递、处理中文链接</li>
-                            <li>encodeURIComponent 会编码更多字符，包括 / : 等</li>
+                            <li><strong>URL编码</strong>将特殊字符转换为%xx格式</li>
+                            <li><strong>URL解码</strong>化xx格式的编码还原为原字</li>
+                            <li>常用于URL参数传递、处理中文链</li>
+                            <li>encodeURIComponent 会编码更多字符，包括 / : </li>
                         </ul>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
             <footer class="footer">
                 <div class="footer-content">
                     <p class="copyright">
-                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/zh/douyin/" target="_blank">合作伙伴：TapSave</a>
                     </p>
                 </div>
             </footer>
@@ -124,10 +124,10 @@
             if (!text) return;
             
             if (encodeAll.checked) {
-                // 编码所有字符
+                // 编码所有字化
                 outputText.value = encodeURIComponent(text);
             } else {
-                // 只编码特殊字符
+                // 只编码特殊字化
                 outputText.value = encodeURI(text);
             }
         }
@@ -160,3 +160,6 @@
     </script>
 </body>
 </html>
+
+
+

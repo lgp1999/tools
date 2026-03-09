@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>时间戳转换 - ToolBox Pro</title>
+    <title>时间戳转换- ToolBox Pro</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -27,15 +27,15 @@
                 <div class="nav-section">
                     <div class="nav-title">时间日期</div>
                     <ul class="nav-list">
-                        <li><a href="timestamp.html" class="active"><i class="fas fa-history"></i><span>时间戳转换</span></a></li>
-                        <li><a href="countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                        <li><a href="timestamp.html" class="active"><i class="fas fa-history"></i><span>时间戳转换��</span></a></li>
+                        <li><a href="countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时��</span></a></li>
                     </ul>
                 </div>
             </nav>
             <div class="friend-links">
-                <a href="https://www.tapsave.net/" target="_blank" rel="noopener noreferrer" class="friend-link">
+                <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
-                    <span>TapSave</span>
+                    <span>抖音视频下载 - TapSave</span>
                 </a>
             </div>
         </aside>
@@ -43,7 +43,7 @@
         <main class="main-content">
             <header class="top-header">
                 <div class="header-left">
-                    <h1>时间戳转换</h1>
+                    <h1>时间戳转换/h1>
                     <p class="subtitle">Unix时间戳与日期时间互转</p>
                 </div>
             </header>
@@ -61,8 +61,8 @@
                         
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                             <div>
-                                <label class="tool-label">时间戳 → 日期时间</label>
-                                <input type="text" class="tool-input" id="tsInput" placeholder="输入时间戳（秒或毫秒）">
+                                <label class="tool-label">时间化日期时间</label>
+                                <input type="text" class="tool-input" id="tsInput" placeholder="输入时间戳（秒或毫秒化>
                                 <div class="tool-actions" style="margin-top: 12px;">
                                     <button class="btn btn-primary" onclick="tsToDate()">
                                         <i class="fas fa-arrow-down"></i> 转换
@@ -77,7 +77,7 @@
                             </div>
                             
                             <div>
-                                <label class="tool-label">日期时间 → 时间戳</label>
+                                <label class="tool-label">日期时间 化时间</label>
                                 <input type="datetime-local" class="tool-input" id="dateInput" step="1">
                                 <div class="tool-actions" style="margin-top: 12px;">
                                     <button class="btn btn-primary" onclick="dateToTs()">
@@ -97,13 +97,13 @@
                     <div class="tool-box">
                         <h3 class="section-title">
                             <i class="fas fa-info-circle"></i>
-                            关于时间戳
+                            关于时间化
                         </h3>
                         <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
-                            <li><strong>Unix时间戳：</strong>从1970年1月1日UTC开始经过的秒数</li>
-                            <li>秒级时间戳：10位数字（如 1704067200）</li>
-                            <li>毫秒级时间戳：13位数字（如 1704067200000）</li>
-                            <li>广泛应用于编程、数据库、API接口等领域</li>
+                            <li><strong>Unix时间戳：</strong>化970化日UTC开始经过的秒数</li>
+                            <li>秒级时间戳：10位数字（化1704067200</li>
+                            <li>毫秒级时间戳化3位数字（化1704067200000</li>
+                            <li>广泛应用于编程、数据库、API接口等领</li>
                         </ul>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
             <footer class="footer">
                 <div class="footer-content">
                     <p class="copyright">
-                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/" target="_blank">合作伙伴：TapSave</a>
+                        © 2024 ToolBox Pro. <a href="https://www.tapsave.net/zh/douyin/" target="_blank">合作伙伴：TapSave</a>
                     </p>
                 </div>
             </footer>
@@ -125,7 +125,7 @@
             const now = new Date();
             document.getElementById('currentTime').textContent = now.toLocaleString('zh-CN');
             document.getElementById('currentTimestamp').textContent = 
-                '秒级: ' + Math.floor(now.getTime()/1000) + ' | 毫秒级: ' + now.getTime();
+                '秒级: ' + Math.floor(now.getTime()/1000) + ' | 毫秒化 ' + now.getTime();
         }
         
         setInterval(updateCurrentTime, 1000);
@@ -165,15 +165,18 @@
             
             const date = new Date(dateStr);
             if (isNaN(date.getTime())) {
-                document.getElementById('dateResult').textContent = '无效的日期';
+                document.getElementById('dateResult').textContent = '无效的日化;
                 return;
             }
             
             document.getElementById('dateResult').innerHTML = `
                 <strong>秒级: ${Math.floor(date.getTime()/1000)}</strong><br>
-                <small>毫秒级: ${date.getTime()}</small>
+                <small>毫秒化 ${date.getTime()}</small>
             `;
         }
     </script>
 </body>
 </html>
+
+
+
