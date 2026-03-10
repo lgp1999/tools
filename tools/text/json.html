@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON格式化- ToolBox Pro</title>
+    <title>JSON格式化 - ToolBox Pro</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- 侧边栏 -->
+                <!-- 侧边栏 -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -29,23 +29,63 @@
                     <div class="nav-title">热门工具</div>
                     <ul class="nav-list">
                         <li><a href="../../index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
-                        <li><a href="json.html" class="active"><i class="fas fa-code"></i><span>JSON格式</span></a></li>
+                        <li><a href="../text/json.html" class="active"><i class="fas fa-code"></i><span>JSON格式化</span></a></li>
+                        <li><a href="../encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64转换</span></a></li>
+                        <li><a href="../office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
                     </ul>
                 </div>
                 <div class="nav-section">
                     <div class="nav-title">文本工具</div>
                     <ul class="nav-list">
-                        <li><a href="json.html" class="active"><i class="fas fa-brackets-curly"></i><span>JSON格式</span></a></li>
-                        <li><a href="text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
-                        <li><a href="word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
-                        <li><a href="markdown.html"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
+                        <li><a href="../text/json.html" class="active"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="../text/text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="../text/word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                        <li><a href="../text/markdown.html"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
                     </ul>
                 </div>
                 <div class="nav-section">
                     <div class="nav-title">编码加密</div>
                     <ul class="nav-list">
                         <li><a href="../encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="../encode/url.html"><i class="fas fa-link"></i><span>URL编码</span></a></li>
                         <li><a href="../encode/md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="../encode/sha.html"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                        <li><a href="../encode/aes.html"><i class="fas fa-lock"></i><span>AES加密</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">单位转换</div>
+                    <ul class="nav-list">
+                        <li><a href="../convert/length.html"><i class="fas fa-ruler"></i><span>长度转换</span></a></li>
+                        <li><a href="../convert/color.html"><i class="fas fa-palette"></i><span>颜色转换</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">办公辅助</div>
+                    <ul class="nav-list">
+                        <li><a href="../office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                        <li><a href="../office/password.html"><i class="fas fa-key"></i><span>密码生成</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">图片工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../image/base64.html"><i class="fas fa-image"></i><span>图片Base64</span></a></li>
+                        <li><a href="../image/compress.html"><i class="fas fa-compress-alt"></i><span>图片压缩</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">时间日期</div>
+                    <ul class="nav-list">
+                        <li><a href="../time/timestamp.html"><i class="fas fa-clock"></i><span>时间戳转换</span></a></li>
+                        <li><a href="../time/countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">开发工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../dev/regex.html"><i class="fas fa-code"></i><span>正则测试</span></a></li>
+                        <li><a href="../dev/uuid.html"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
                     </ul>
                 </div>
             </nav>
@@ -72,7 +112,7 @@
                         <div class="options-group">
                             <div class="option-item">
                                 <input type="checkbox" id="autoFormat" checked>
-                                <label for="autoFormat">自动格式</label>
+                                <label for="autoFormat">自动格式化</label>
                             </div>
                             <div class="option-item">
                                 <input type="checkbox" id="sortKeys">
@@ -107,7 +147,7 @@
                                 <i class="fas fa-terminal"></i> 转义
                             </button>
                             <button class="btn btn-secondary" onclick="unescapeJSON()">
-                                <i class="fas fa-remove-format"></i> 去转化
+                                <i class="fas fa-remove-format"></i> 去转义
                             </button>
                             <button class="btn btn-secondary" onclick="copyResult()">
                                 <i class="fas fa-copy"></i> 复制结果
@@ -134,11 +174,11 @@
                             使用说明
                         </h3>
                         <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
-                            <li><strong>格式化：</strong>将压缩的JSON转换为易读的格式化文</li>
-                            <li><strong>压缩</strong>删除所有不必要的空格，减小JSON体积</li>
-                            <li><strong>转义</strong>将JSON字符串中的特殊字符进行转</li>
-                            <li><strong>去转义：</strong>将转义后的JSON字符串还</li>
-                            <li>所有操作均在浏览器本地进行，不会上传到服务</li>
+                            <li><strong>格式化：</strong>将压缩的JSON转换为易读的格式化文本</li>
+                            <li><strong>压缩：</strong>删除所有不必要的空格，减小JSON体积</li>
+                            <li><strong>转义：</strong>将JSON字符串中的特殊字符进行转义</li>
+                            <li><strong>去转义：</strong>将转义后的JSON字符串还原</li>
+                            <li>所有操作均在浏览器本地进行，不会上传到服务器</li>
                         </ul>
                     </div>
                 </div>

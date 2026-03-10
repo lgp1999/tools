@@ -51,7 +51,13 @@ function initSidebar() {
     const currentPage = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-list a');
     navLinks.forEach(link => {
-        if (link.getAttribute('href').includes(currentPage)) {
+        const href = link.getAttribute('href');
+        // 获取当前页面的文件名
+        const currentFile = currentPage.split('/').pop() || 'index.html';
+        const hrefFile = href.split('/').pop();
+        
+        // 只有当链接指向当前页面时才高亮
+        if (currentFile === hrefFile || (currentPage.endsWith('/') && hrefFile === 'index.html')) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');

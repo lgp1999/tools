@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="app-container">
+                <!-- 侧边栏 -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -25,14 +26,71 @@
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-section">
-                    <div class="nav-title">开发工化/div>
+                    <div class="nav-title">热门工具</div>
                     <ul class="nav-list">
-                        <li><a href="uuid.html" class="active"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
-                        <li><a href="regex.html"><i class="fas fa-spell-check"></i><span>正则测试</span></a></li>
+                        <li><a href="../../index.html"><i class="fas fa-home"></i><span>首页</span></a></li>
+                        <li><a href="../text/json.html"><i class="fas fa-code"></i><span>JSON格式化</span></a></li>
+                        <li><a href="../encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64转换</span></a></li>
+                        <li><a href="../office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">文本工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../text/json.html"><i class="fas fa-brackets-curly"></i><span>JSON格式化</span></a></li>
+                        <li><a href="../text/text-diff.html"><i class="fas fa-not-equal"></i><span>文本对比</span></a></li>
+                        <li><a href="../text/word-count.html"><i class="fas fa-font"></i><span>字数统计</span></a></li>
+                        <li><a href="../text/markdown.html"><i class="fas fa-file-alt"></i><span>Markdown预览</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">编码加密</div>
+                    <ul class="nav-list">
+                        <li><a href="../encode/base64.html"><i class="fas fa-exchange-alt"></i><span>Base64</span></a></li>
+                        <li><a href="../encode/url.html"><i class="fas fa-link"></i><span>URL编码</span></a></li>
+                        <li><a href="../encode/md5.html"><i class="fas fa-fingerprint"></i><span>MD5加密</span></a></li>
+                        <li><a href="../encode/sha.html"><i class="fas fa-hashtag"></i><span>SHA加密</span></a></li>
+                        <li><a href="../encode/aes.html"><i class="fas fa-lock"></i><span>AES加密</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">单位转换</div>
+                    <ul class="nav-list">
+                        <li><a href="../convert/length.html"><i class="fas fa-ruler"></i><span>长度转换</span></a></li>
+                        <li><a href="../convert/color.html"><i class="fas fa-palette"></i><span>颜色转换</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">办公辅助</div>
+                    <ul class="nav-list">
+                        <li><a href="../office/qrcode.html"><i class="fas fa-qrcode"></i><span>二维码生成</span></a></li>
+                        <li><a href="../office/password.html"><i class="fas fa-key"></i><span>密码生成</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">图片工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../image/base64.html"><i class="fas fa-image"></i><span>图片Base64</span></a></li>
+                        <li><a href="../image/compress.html"><i class="fas fa-compress-alt"></i><span>图片压缩</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">时间日期</div>
+                    <ul class="nav-list">
+                        <li><a href="../time/timestamp.html"><i class="fas fa-clock"></i><span>时间戳转换</span></a></li>
+                        <li><a href="../time/countdown.html"><i class="fas fa-hourglass-half"></i><span>倒计时</span></a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-title">开发工具</div>
+                    <ul class="nav-list">
+                        <li><a href="../dev/regex.html"><i class="fas fa-code"></i><span>正则测试</span></a></li>
+                        <li><a href="../dev/uuid.html" class="active"><i class="fas fa-fingerprint"></i><span>UUID生成</span></a></li>
                     </ul>
                 </div>
             </nav>
             <div class="friend-links">
+                <div class="nav-title">友情链接</div>
                 <a href="https://www.tapsave.net/zh/douyin/" target="_blank" rel="noopener noreferrer" class="friend-link">
                     <i class="fas fa-external-link-alt"></i>
                     <span>抖音视频下载 - TapSave</span>
@@ -44,7 +102,7 @@
             <header class="top-header">
                 <div class="header-left">
                     <h1>UUID生成</h1>
-                    <p class="subtitle">生成唯一标识化UUID v4</p>
+                    <p class="subtitle">生成唯一标识符 UUID v4</p>
                 </div>
             </header>
             
@@ -67,7 +125,7 @@
                         </div>
                         
                         <div class="tool-section">
-                            <label class="tool-label">生成化UUID</label>
+                            <label class="tool-label">生成的UUID</label>
                             <textarea class="tool-textarea" id="uuidOutput" readonly style="min-height: 250px; font-family: monospace; line-height: 2;"></textarea>
                         </div>
                         
@@ -91,7 +149,7 @@
                         </h3>
                         <ul style="color: var(--text-secondary); font-size: 14px; line-height: 2;">
                             <li><strong>UUID</strong> (Universally Unique Identifier) 通用唯一识别</li>
-                            <li>标准格式化-4-4-4-12 化2个十六进制字</li>
+                            <li>标准格式：8-4-4-4-12 共32个十六进制字符</li>
                             <li>版本4使用随机数生成，重复概率极低</li>
                             <li>常用于数据库主键、会话标识、分布式系统</li>
                         </ul>
